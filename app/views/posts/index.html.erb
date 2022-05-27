@@ -12,6 +12,22 @@
       </h4>
       <img class="img-fluid" src="<%= post["image"] %>" class="w-full">
       <p><%= post["body"] %></p>
+      <% @comments = Comment.where({ "post_id" => post["id"] }) %>
+      <ul>
+        <% for comment in @comments %>
+          <li>
+            <%= comment["note"] %>
+          </li>
+        <% end %>
+      </ul>
+      New Comment
+      <%= form_with :model => @comment do |form| %>
+        <p>
+          <%= form.label "note" %>
+          <%= form.text_area "note" %>
+        </p>
+        <%= form.submit %>
+      <% end %>
     </div>
   <% end %>
 </div>
